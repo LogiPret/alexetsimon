@@ -46,8 +46,8 @@ export function Footer() {
           transition={{ delay: 0.2 }}
           className="mt-12 text-center"
         >
-          <p className="text-7xl md:text-9xl font-bold tracking-tighter text-[#182542]/10 select-none">
-            ALEX<span className="text-[#182542]/5">&</span>SIMON
+          <p className="text-7xl md:text-9xl font-bold tracking-tighter text-[#182542] select-none">
+            ALEX<span className="text-[#182542]/50">&</span>SIMON
           </p>
         </motion.div>
       </div>

@@ -126,8 +126,6 @@ const soldProperties: Property[] = [
 export function Properties() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [activeTab, setActiveTab] = useState<"available" | "sold">("available")
-  const [categoryFilter, setCategoryFilter] = useState<"all" | "residential" | "commercial">("all")
   const [scrapedProperties, setScrapedProperties] = useState<Property[]>([])
   const [lastUpdated, setLastUpdated] = useState<string | null>(null)
 
@@ -177,15 +175,13 @@ export function Properties() {
   }, [])
 
   // Use scraped properties if available, otherwise fallback to static
-  const properties = scrapedProperties.length > 0 ? scrapedProperties : staticProperties
+  const displayProperties = scrapedProperties.length > 0 ? scrapedProperties : staticProperties
 
-  const baseProperties = activeTab === "available" ? properties : soldProperties
-
-  const displayProperties =
-    categoryFilter === "all" ? baseProperties : baseProperties.filter((p) => p.category === categoryFilter)
-
-  const residentialCount = baseProperties.filter((p) => p.category === "residential").length
-  const commercialCount = baseProperties.filter((p) => p.category === "commercial").length
+  // Helper to extract numeric price for calculator
+  const extractPrice = (priceStr: string) => {
+    const num = priceStr.replace(/[^0-9]/g, "")
+    return num ? parseInt(num, 10) : 500000
+  }
 
   return (
     <section id="properties" className="py-24 bg-[#182542]" ref={ref}>
@@ -207,73 +203,10 @@ export function Properties() {
           </p>
         </motion.div>
 
-        {/* Main Tabs - Updated colors */}
-        <div className="flex justify-center gap-2 mb-6">
-          <Button
-            variant={activeTab === "available" ? "default" : "outline"}
-            onClick={() => setActiveTab("available")}
-            className={
-              activeTab === "available"
-                ? "bg-white hover:bg-white/90 text-[#182542] font-semibold"
-                : "border-white/30 text-white hover:bg-white/10"
-            }
-          >
-            À vendre ({properties.length})
-          </Button>
-          <Button
-            variant={activeTab === "sold" ? "default" : "outline"}
-            onClick={() => setActiveTab("sold")}
-            className={
-              activeTab === "sold"
-                ? "bg-white hover:bg-white/90 text-[#182542] font-semibold"
-                : "border-white/30 text-white hover:bg-white/10"
-            }
-          >
-            Vendues ({soldProperties.length})
-          </Button>
-        </div>
-
-        <div className="flex justify-center gap-2 mb-10">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setCategoryFilter("all")}
-            className={
-              categoryFilter === "all" ? "bg-white/20 text-white" : "text-white/60 hover:text-white hover:bg-white/10"
-            }
-          >
-            Tout ({baseProperties.length})
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setCategoryFilter("residential")}
-            className={
-              categoryFilter === "residential"
-                ? "bg-white/20 text-white"
-                : "text-white/60 hover:text-white hover:bg-white/10"
-            }
-          >
-            Résidentiel ({residentialCount})
-          </Button>
-          {commercialCount > 0 && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setCategoryFilter("commercial")}
-              className={
-                categoryFilter === "commercial"
-                  ? "bg-white/20 text-white"
-                  : "text-white/60 hover:text-white hover:bg-white/10"
-              }
-            >
-              Commercial ({commercialCount})
-            </Button>
-          )}
-        </div>
-
         {/* Properties Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          className={`grid gap-6 ${displayProperties.length === 1 ? "max-w-md mx-auto" : displayProperties.length === 2 ? "md:grid-cols-2 max-w-3xl mx-auto" : "md:grid-cols-2 lg:grid-cols-3"}`}
+        >
           {displayProperties.map((property, index) => (
             <motion.a
               key={property.id}
@@ -293,11 +226,6 @@ export function Properties() {
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                {activeTab === "sold" && (
-                  <div className="absolute inset-0 bg-[#182542]/70 flex items-center justify-center">
-                    <span className="text-2xl font-bold text-white">Vendu</span>
-                  </div>
-                )}
                 <div className="absolute bottom-4 left-4">
                   <span className="bg-[#182542] hover:bg-[#182542]/90 text-white font-semibold shadow-lg text-sm px-3 py-2 rounded-md">
                     Voir l'inscription
@@ -306,7 +234,7 @@ export function Properties() {
               </div>
 
               {/* Content */}
-              <div className="p-5">
+              <div className="p-5 flex flex-col h-[calc(100%-13rem)]">
                 <div className="flex items-start justify-between mb-2">
                   <span className="text-[#182542] font-medium">{property.location}</span>
                 </div>
@@ -338,10 +266,34 @@ export function Properties() {
                   <span>Référence : {property.reference || property.mlsNumber}</span>
                 </div>
 
-                <p className="text-sm text-muted-foreground flex items-center gap-1">
+                <p className="text-sm text-muted-foreground flex items-center gap-1 mb-3">
                   <MapPin className="w-3 h-3" />
                   {property.address}
                 </p>
+
+                <div className="mt-auto">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="w-full text-[#182542] border-[#182542] hover:bg-[#182542] hover:text-white"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      const calcSection = document.getElementById("calculator")
+                      if (calcSection) {
+                        calcSection.scrollIntoView({ behavior: "smooth" })
+                        // Dispatch custom event with price
+                        window.dispatchEvent(
+                          new CustomEvent("setCalculatorPrice", {
+                            detail: { price: extractPrice(property.price) },
+                          })
+                        )
+                      }
+                    }}
+                  >
+                    Calculer mon hypothèque
+                  </Button>
+                </div>
               </div>
             </motion.a>
           ))}

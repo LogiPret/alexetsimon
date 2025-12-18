@@ -101,13 +101,27 @@ export function Services() {
                     </span>
                   ))}
                 </div>
-                <Button
-                  variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-[#182542] group/btn bg-transparent"
-                >
-                  En savoir plus
-                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
-                </Button>
+                <div className="flex justify-center">
+                  <Button
+                    variant="outline"
+                    className="border-white text-white hover:bg-white hover:text-[#182542] group/btn bg-transparent"
+                    onClick={() => {
+                      const contactSection = document.getElementById("contact")
+                      if (contactSection) {
+                        contactSection.scrollIntoView({ behavior: "smooth" })
+                        // Dispatch event to set subject
+                        window.dispatchEvent(
+                          new CustomEvent("setContactSubject", {
+                            detail: { subject: service.id === "vendre" ? "vente" : "achat" },
+                          })
+                        )
+                      }
+                    }}
+                  >
+                    {service.id === "vendre" ? "Vendre" : "Acheter"}
+                    <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
+                  </Button>
+                </div>
               </div>
               <motion.div
                 className="absolute -bottom-20 -right-20 w-64 h-64 rounded-full bg-white/5"
@@ -135,12 +149,12 @@ export function Services() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.5 + typeIndex * 0.15 }}
-                  className="relative rounded-2xl overflow-hidden bg-card border border-border shadow-sm hover:shadow-lg transition-shadow duration-300"
+                  className="relative rounded-2xl overflow-hidden bg-card border border-border shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col"
                 >
                   <div className="h-1.5 bg-[#182542]" />
 
                   {/* Header */}
-                  <div className="p-6 md:p-8">
+                  <div className="p-6 md:p-8 flex flex-col flex-1">
                     <div className="mb-4">
                       <h4 className="text-2xl font-bold text-[#182542]">{data.title}</h4>
                       <p className="text-sm font-medium text-[#182542]/70">{data.tagline}</p>
@@ -171,7 +185,7 @@ export function Services() {
                     </div>
 
                     {/* Services List */}
-                    <div className="space-y-3">
+                    <div className="space-y-3 mb-6">
                       {data.services.map((service, index) => (
                         <div
                           key={service.label}
@@ -183,10 +197,12 @@ export function Services() {
                       ))}
                     </div>
 
-                    <Button className="w-full mt-6 bg-[#182542] hover:bg-[#182542]/90 text-white">
-                      Discuter de mon projet {type === "residential" ? "résidentiel" : "commercial"}
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
+                    <div className="mt-auto">
+                      <Button className="w-full bg-[#182542] hover:bg-[#182542]/90 text-white">
+                        Discuter de mon projet {type === "residential" ? "résidentiel" : "commercial"}
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </Button>
+                    </div>
                   </div>
                 </motion.div>
               )

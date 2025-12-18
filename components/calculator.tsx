@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef, useState, useMemo } from "react"
+import { useRef, useState, useMemo, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Slider } from "@/components/ui/slider"
@@ -14,6 +14,17 @@ export function MortgageCalculator() {
   const [downPayment, setDownPayment] = useState(100000)
   const [interestRate, setInterestRate] = useState(5.5)
   const [amortization, setAmortization] = useState(25)
+
+  // Listen for price from property cards
+  useEffect(() => {
+    const handleSetPrice = (e: CustomEvent<{ price: number }>) => {
+      const newPrice = e.detail.price
+      setPrice(newPrice)
+      setDownPayment(Math.round(newPrice * 0.2)) // 20% down payment
+    }
+    window.addEventListener("setCalculatorPrice", handleSetPrice as EventListener)
+    return () => window.removeEventListener("setCalculatorPrice", handleSetPrice as EventListener)
+  }, [])
 
   const monthlyPayment = useMemo(() => {
     const principal = price - downPayment
@@ -40,7 +51,7 @@ export function MortgageCalculator() {
   }
 
   return (
-    <section id="calculator" className="py-24 bg-background" ref={ref}>
+    <section id="calculator" className="py-12 bg-background" ref={ref}>
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           className="text-center mb-12"

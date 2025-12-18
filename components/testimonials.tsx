@@ -81,7 +81,7 @@ export function Testimonials() {
   }
 
   return (
-    <section id="testimonials" className="py-24 bg-background overflow-hidden" ref={ref}>
+    <section id="testimonials" className="py-12 bg-background overflow-hidden" ref={ref}>
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           className="text-center mb-12"

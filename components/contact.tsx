@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { motion, useInView } from "framer-motion"
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import { Send, Mail, MapPin, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -14,6 +14,33 @@ export function Contact() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [subject, setSubject] = useState<"achat" | "vente" | "evaluation" | "autre" | "">("")
+  const [phone, setPhone] = useState("")
+  const [phoneDisplay, setPhoneDisplay] = useState("")
+
+  // Format phone for display, keep raw for submission
+  const formatPhoneDisplay = (value: string) => {
+    const digits = value.replace(/\D/g, "").slice(0, 10)
+    if (digits.length === 0) return ""
+    if (digits.length <= 3) return `(${digits}`
+    if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`
+    return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`
+  }
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value.replace(/\D/g, "").slice(0, 10)
+    setPhone(raw)
+    setPhoneDisplay(formatPhoneDisplay(e.target.value))
+  }
+
+  // Listen for subject from services buttons
+  useEffect(() => {
+    const handleSetSubject = (e: CustomEvent<{ subject: string }>) => {
+      setSubject(e.detail.subject as "achat" | "vente" | "evaluation")
+    }
+    window.addEventListener("setContactSubject", handleSetSubject as EventListener)
+    return () => window.removeEventListener("setContactSubject", handleSetSubject as EventListener)
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -139,14 +166,56 @@ export function Contact() {
                     <label htmlFor="phone" className="text-sm font-medium text-[#182542]">
                       Téléphone
                     </label>
-                    <Input id="phone" type="tel" placeholder="(450) 000-0000" className="rounded-lg" />
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="(450) 000-0000"
+                      className="rounded-lg"
+                      value={phoneDisplay}
+                      onChange={handlePhoneChange}
+                      pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}"
+                    />
+                    {/* Hidden input with raw phone value for form submission */}
+                    <input type="hidden" name="phone_raw" value={phone} />
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="subject" className="text-sm font-medium text-[#182542]">
-                      Sujet
-                    </label>
-                    <Input id="subject" placeholder="Achat, vente, évaluation..." required className="rounded-lg" />
+                    <label className="text-sm font-medium text-[#182542]">Sujet</label>
+                    <div className="flex flex-wrap gap-3">
+                      {[
+                        { value: "achat", label: "Achat" },
+                        { value: "vente", label: "Vente" },
+                        { value: "evaluation", label: "Évaluation" },
+                        { value: "autre", label: "Autre" },
+                      ].map((option) => (
+                        <label
+                          key={option.value}
+                          className={`flex items-center gap-2 px-4 py-2 rounded-lg border cursor-pointer transition-all ${
+                            subject === option.value
+                              ? "border-[#182542] bg-[#182542]/5 text-[#182542]"
+                              : "border-border hover:border-[#182542]/50"
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            name="subject"
+                            value={option.value}
+                            checked={subject === option.value}
+                            onChange={(e) => setSubject(e.target.value as "achat" | "vente" | "evaluation" | "autre")}
+                            className="sr-only"
+                            required
+                          />
+                          <div
+                            className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
+                              subject === option.value ? "border-[#182542]" : "border-muted-foreground"
+                            }`}
+                          >
+                            {subject === option.value && <div className="w-2 h-2 rounded-full bg-[#182542]" />}
+                          </div>
+                          <span className="text-sm font-medium">{option.label}</span>
+                        </label>
+                      ))}
+                    </div>
                   </div>
 
                   <div className="space-y-2">
