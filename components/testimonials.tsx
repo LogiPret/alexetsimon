@@ -138,13 +138,6 @@ export function Testimonials() {
                   className="max-w-4xl mx-auto"
                 >
                   <div className="relative p-8 md:p-12 rounded-2xl bg-[#182542]">
-                    {/* Quote Icon */}
-                    <div className="absolute -top-4 left-8 md:left-12">
-                      <div className="p-3 rounded-full bg-white text-[#182542]">
-                        <Quote className="w-6 h-6" />
-                      </div>
-                    </div>
-
                     {/* Content */}
                     <div className="pt-4">
                       <p className="text-xl md:text-2xl text-white leading-relaxed mb-8 text-pretty">
@@ -190,16 +183,6 @@ export function Testimonials() {
           ))}
         </div>
       </div>
-
-      {/* CTA */}
-      <motion.div
-        className="text-center mt-12"
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6, delay: 0.5 }}
-      >
-        <Button className="bg-[#182542] hover:bg-[#182542]/90 text-white">Voir tous les témoignages clients</Button>
-      </motion.div>
     </section>
   )
 }

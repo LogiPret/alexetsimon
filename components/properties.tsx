@@ -309,11 +309,6 @@ export function Properties() {
               <div className="p-5">
                 <div className="flex items-start justify-between mb-2">
                   <span className="text-[#182542] font-medium">{property.location}</span>
-                  {"type" in property && property.type && (
-                    <span className="text-xs font-medium px-2 py-1 bg-muted rounded text-[#182542]">
-                      {property.type}
-                    </span>
-                  )}
                 </div>
 
                 <div className="h-px bg-border mb-3" />

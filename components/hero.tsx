@@ -6,7 +6,7 @@ import Image from "next/image"
 
 export function Hero() {
   return (
-    <section className="mt-20 relative overflow-hidden w-full bg-[#182542]">
+    <section className="pt-14 relative overflow-hidden w-full bg-[#182542]">
       {/* Background Image - Always full width, height adjusts */}
       <div className="relative w-full">
         <Image
@@ -43,7 +43,7 @@ export function Hero() {
           transition={{ delay: 1 }}
         >
           <motion.a
-            href="#partners"
+            href="#services"
             className="flex flex-col items-center gap-2 text-white/70 hover:text-white transition-colors"
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
