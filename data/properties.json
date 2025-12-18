@@ -1,0 +1,132 @@
+{
+  "success": true,
+  "broker": {
+    "name": "Alexandre Brosseau",
+    "agency": "Alex & Simon - Courtiers Immobiliers"
+  },
+  "properties": [
+    {
+      "id": "23803401",
+      "mlsNumber": "23803401",
+      "price": "$1,195,000",
+      "address": "1535Z, Montée de la Côte-Rouge, Mirabel",
+      "type": "Hobby farm for sale",
+      "link": "https://www.centris.ca/en/hobby-farms~for-sale~mirabel/23803401",
+      "bedrooms": "3",
+      "bathrooms": "3",
+      "imageUrl": "https://mspublic.centris.ca/media.ashx?id=ADDD250DE92EF73DDDDDDDDDD4&t=pi&sm=m&w=1260&h=1024",
+      "images": ["https://mspublic.centris.ca/media.ashx?id=ADDD250DE92EF73DDDDDDDDDD4&t=pi&sm=m&w=1260&h=1024"]
+    },
+    {
+      "id": "17631358",
+      "mlsNumber": "17631358",
+      "price": "$875,000",
+      "address": "1900, Rue Émile-Martineau, apt. 1501, Laval (Laval-des-Rapides)",
+      "type": "Condo for sale",
+      "link": "https://www.centris.ca/en/condos~for-sale~laval-laval-des-rapides/17631358",
+      "bedrooms": "2",
+      "bathrooms": "2",
+      "imageUrl": "https://mspublic.centris.ca/media.ashx?id=ADDD250DEFF3AF9DDDDDDDDDDF&t=pi&sm=m&w=1260&h=1024",
+      "images": ["https://mspublic.centris.ca/media.ashx?id=ADDD250DEFF3AF9DDDDDDDDDDF&t=pi&sm=m&w=1260&h=1024"]
+    },
+    {
+      "id": "20850117",
+      "mlsNumber": "20850117",
+      "price": "$279,900",
+      "address": "Chemin des Buses, Nominingue",
+      "type": "Lot for sale",
+      "link": "https://www.centris.ca/en/lots~for-sale~nominingue/20850117",
+      "bedrooms": null,
+      "bathrooms": null,
+      "imageUrl": "https://mspublic.centris.ca/media.ashx?id=ADDD250DE03985BDDDDDDDDDDF&t=pi&sm=m&w=1260&h=1024",
+      "images": ["https://mspublic.centris.ca/media.ashx?id=ADDD250DE03985BDDDDDDDDDDF&t=pi&sm=m&w=1260&h=1024"]
+    },
+    {
+      "id": "9120094",
+      "mlsNumber": "9120094",
+      "price": "$535,000",
+      "address": "296Z - 298Z, Montée Saint-Vincent, Saint-Placide",
+      "type": "Duplex for sale",
+      "link": "https://www.centris.ca/en/duplexes~for-sale~saint-placide/9120094",
+      "bedrooms": "4",
+      "bathrooms": "2",
+      "imageUrl": "https://mspublic.centris.ca/media.ashx?id=ADDD250DE9A3336DDDDDDDDDDC&t=pi&sm=m&w=1260&h=1024",
+      "images": ["https://mspublic.centris.ca/media.ashx?id=ADDD250DE9A3336DDDDDDDDDDC&t=pi&sm=m&w=1260&h=1024"]
+    },
+    {
+      "id": "16963923",
+      "mlsNumber": "16963923",
+      "price": "$535,000",
+      "address": "296 - 298, Montée Saint-Vincent, Saint-Placide",
+      "type": "House for sale",
+      "link": "https://www.centris.ca/en/houses~for-sale~saint-placide/16963923",
+      "bedrooms": "4",
+      "bathrooms": "2",
+      "imageUrl": "https://mspublic.centris.ca/media.ashx?id=ADDD250DE9A3717DDDDDDDDDD1&t=pi&sm=m&w=1260&h=1024",
+      "images": ["https://mspublic.centris.ca/media.ashx?id=ADDD250DE9A3717DDDDDDDDDD1&t=pi&sm=m&w=1260&h=1024"]
+    },
+    {
+      "id": "14051269",
+      "mlsNumber": "14051269",
+      "price": "$1,195,000",
+      "address": "1535, Montée de la Côte-Rouge, Mirabel",
+      "type": "House for sale",
+      "link": "https://www.centris.ca/en/houses~for-sale~mirabel/14051269",
+      "bedrooms": "3",
+      "bathrooms": "3",
+      "imageUrl": "https://mspublic.centris.ca/media.ashx?id=ADDD250DE917B70DDDDDDDDDDD&t=pi&sm=m&w=1260&h=1024",
+      "images": ["https://mspublic.centris.ca/media.ashx?id=ADDD250DE917B70DDDDDDDDDDD&t=pi&sm=m&w=1260&h=1024"]
+    },
+    {
+      "id": "11208857",
+      "mlsNumber": "11208857",
+      "price": "$789,900",
+      "address": "231 - 235, Rue Vaillancourt, Saint-Jérôme",
+      "type": "Triplex for sale",
+      "link": "https://www.centris.ca/en/triplexes~for-sale~saint-jerome/11208857",
+      "bedrooms": "2",
+      "bathrooms": "1",
+      "imageUrl": "https://mspublic.centris.ca/media.ashx?id=ADDD250DE86B9E6DDDDDDDDDDD&t=pi&sm=m&w=1260&h=1024",
+      "images": ["https://mspublic.centris.ca/media.ashx?id=ADDD250DE86B9E6DDDDDDDDDDD&t=pi&sm=m&w=1260&h=1024"]
+    },
+    {
+      "id": "24121579",
+      "mlsNumber": "24121579",
+      "price": "$589,900",
+      "address": "657, boulevard Monseigneur-Dubois, Saint-Jérôme",
+      "type": "House for sale",
+      "link": "https://www.centris.ca/en/houses~for-sale~saint-jerome/24121579",
+      "bedrooms": "8",
+      "bathrooms": "2",
+      "imageUrl": "https://mspublic.centris.ca/media.ashx?id=ADDD250DE8C7FF5DDDDDDDDDD0&t=pi&sm=m&w=1260&h=1024",
+      "images": ["https://mspublic.centris.ca/media.ashx?id=ADDD250DE8C7FF5DDDDDDDDDD0&t=pi&sm=m&w=1260&h=1024"]
+    },
+    {
+      "id": "20155954",
+      "mlsNumber": "20155954",
+      "price": "$119,900",
+      "address": "Chemin des Érables, Saint-Michel-des-Saints",
+      "type": "Lot for sale",
+      "link": "https://www.centris.ca/en/lots~for-sale~saint-michel-des-saints/20155954",
+      "bedrooms": null,
+      "bathrooms": null,
+      "imageUrl": "https://mspublic.centris.ca/media.ashx?id=ADDD250DEFFDB5CDDDDDDDDDDF&t=pi&sm=m&w=1260&h=1024",
+      "images": ["https://mspublic.centris.ca/media.ashx?id=ADDD250DEFFDB5CDDDDDDDDDDF&t=pi&sm=m&w=1260&h=1024"]
+    },
+    {
+      "id": "21758006",
+      "mlsNumber": "21758006",
+      "price": "$1,089,900",
+      "address": "378 - 380, Rue Gauthier, Saint-Jérôme",
+      "type": "Quadruplex for sale",
+      "link": "https://www.centris.ca/en/4plex~for-sale~saint-jerome/21758006",
+      "bedrooms": "2",
+      "bathrooms": "1",
+      "imageUrl": "https://mspublic.centris.ca/media.ashx?id=ADDD250DE967799DDDDDDDDDD4&t=pi&sm=m&w=1260&h=1024",
+      "images": ["https://mspublic.centris.ca/media.ashx?id=ADDD250DE967799DDDDDDDDDD4&t=pi&sm=m&w=1260&h=1024"]
+    }
+  ],
+  "propertyCount": 10,
+  "lastUpdated": "2025-12-18T20:08:41.789Z",
+  "scrapedAt": "2025-12-18T20:08:41.767Z"
+}
