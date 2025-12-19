@@ -18,7 +18,7 @@ const partnerCategories = [
         name: "Daniel Timeo",
         company: "RBC",
         phone: "438-351-5086",
-        image: "/rbc.png",
+        image: "/rbc-logo-shield.svg",
       },
       {
         name: "Marie-Ève Hamelin",
@@ -30,7 +30,7 @@ const partnerCategories = [
         name: "Joanie St-Pierre",
         company: "Consortium Hypothécaire",
         phone: "514-686-7627",
-        image: "/consortium.png",
+        image: "/consortium_logo.png",
       },
     ],
   },
