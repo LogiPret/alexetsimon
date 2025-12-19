@@ -24,7 +24,7 @@ const partnerCategories = [
         name: "Marie-Ève Hamelin",
         company: "Desjardins",
         phone: "514-606-6696",
-        image: "/desjardins.png",
+        image: "/desjardins-logo.png",
       },
       {
         name: "Joanie St-Pierre",
@@ -55,7 +55,7 @@ const partnerCategories = [
         name: "FJ & Frères",
         company: "Entrepreneur Général",
         phone: "514-825-7557",
-        image: "/fj freres.png",
+        image: "/fj-freres.webp",
       },
     ],
   },
@@ -118,7 +118,7 @@ export function Partners() {
                   >
                     {"image" in partner && partner.image && (
                       <div className="mb-4 flex justify-center">
-                        <div className="bg-white rounded-xl p-3 w-full h-16 flex items-center justify-center">
+                        <div className="bg-white/60 rounded-xl p-3 w-full h-16 flex items-center justify-center">
                           <Image
                             src={partner.image}
                             alt={partner.company}
