@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 const navItems = [
   { name: "Accueil", href: "#" },
@@ -33,14 +34,12 @@ export function Header() {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2">
-          <div className="text-white px-3 py-2 font-bold text-lg tracking-tight">
-            ALEX<span className="text-white/60">&</span>SIMON
-          </div>
+        <a href="#" className="flex items-center shrink-0">
+          <Image src="/logo.png" alt="Alex & Simon" width={140} height={40} className="h-10 w-auto" priority />
         </a>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-6">
+        <div className="hidden lg:flex items-center gap-6 ml-6">
           {navItems.map((item) => (
             <a
               key={item.name}

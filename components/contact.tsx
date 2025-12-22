@@ -14,9 +14,15 @@ export function Contact() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const [subject, setSubject] = useState<"achat" | "vente" | "evaluation" | "autre" | "">("")
   const [phone, setPhone] = useState("")
   const [phoneDisplay, setPhoneDisplay] = useState("")
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  })
 
   // Format phone for display, keep raw for submission
   const formatPhoneDisplay = (value: string) => {
@@ -45,9 +51,35 @@ export function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    setIsSubmitting(false)
-    setIsSubmitted(true)
+    setError(null)
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: phone,
+          subject: subject,
+          message: formData.message,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Une erreur est survenue")
+      }
+
+      setIsSubmitted(true)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Une erreur est survenue")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -147,18 +179,36 @@ export function Contact() {
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {error && (
+                    <div className="p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">{error}</div>
+                  )}
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label htmlFor="name" className="text-sm font-medium text-[#182542]">
                         Nom
                       </label>
-                      <Input id="name" placeholder="Votre nom" required className="rounded-lg" />
+                      <Input
+                        id="name"
+                        placeholder="Votre nom"
+                        required
+                        className="rounded-lg"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      />
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="email" className="text-sm font-medium text-[#182542]">
                         Courriel
                       </label>
-                      <Input id="email" type="email" placeholder="vous@exemple.com" required className="rounded-lg" />
+                      <Input
+                        id="email"
+                        type="email"
+                        placeholder="vous@exemple.com"
+                        required
+                        className="rounded-lg"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      />
                     </div>
                   </div>
 
@@ -228,6 +278,8 @@ export function Contact() {
                       rows={5}
                       required
                       className="rounded-lg resize-none"
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     />
                   </div>
 

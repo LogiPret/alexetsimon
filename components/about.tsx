@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { Facebook } from "lucide-react"
+import Image from "next/image"
 
 const whyChooseUs = [
   {
@@ -66,8 +67,14 @@ export function About() {
               className="p-6 rounded-2xl bg-[#182542] text-white"
             >
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center text-2xl font-bold">
-                  A&S
+                <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center overflow-hidden">
+                  <Image
+                    src="/logo.png"
+                    alt="Alex & Simon"
+                    width={56}
+                    height={56}
+                    className="w-14 h-auto object-contain"
+                  />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold">Alex & Simon</h3>

@@ -35,19 +35,7 @@ const expertiseData = {
       { label: "Maisons unifamiliales", desc: "Résidences dans les meilleurs quartiers" },
       { label: "Condos & appartements", desc: "Du studio au penthouse de luxe" },
     ],
-    stats: { transactions: "350+", satisfaction: "98%", experience: "15 ans" },
-  },
-  commercial: {
-    title: "Commercial",
-    tagline: "Des investissements stratégiques",
-    description:
-      "En tant que professionnels passionnés du secteur immobilier, nous nous spécialisons aussi dans le domaine du courtage commercial. Notre expertise englobe la négociation de transactions complexes, l'évaluation précise des biens commerciaux et la compréhension approfondie des tendances du marché.",
-    services: [
-      { label: "Immeubles à revenus", desc: "Multiplex et bâtiments locatifs" },
-      { label: "Locaux commerciaux", desc: "Bureaux, commerces et espaces industriels" },
-      { label: "Investissement", desc: "Analyse de rentabilité et conseils stratégiques" },
-    ],
-    stats: { transactions: "150+", portfolio: "50M$+", roi: "12%+" },
+    stats: { transactions: "500+", avis: "38", experience: "10 ans" },
   },
 }
 
@@ -136,77 +124,88 @@ export function Services() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
+          className="relative"
         >
-          <h3 className="text-3xl font-bold text-center mb-10 text-[#182542]">Nos expertises</h3>
+          {/* Expertise Section - Full Width */}
+          <div className="relative rounded-3xl overflow-hidden bg-[#182542]">
+            {/* Background decorative elements */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
 
-          {/* Both Expertise Cards - Side by side on desktop, stacked on mobile */}
-          <div className="grid lg:grid-cols-2 gap-8">
-            {(["residential", "commercial"] as const).map((type, typeIndex) => {
-              const data = expertiseData[type]
-              return (
-                <motion.div
-                  key={type}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.5 + typeIndex * 0.15 }}
-                  className="relative rounded-2xl overflow-hidden bg-card border border-border shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col"
+            <div className="relative z-10 p-8 md:p-12 lg:p-16">
+              {/* Header */}
+              <div className="text-center mb-12">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-white/80 text-xs font-medium uppercase tracking-widest mb-4">
+                  Notre expertise
+                </span>
+                <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">{expertiseData.residential.title}</h3>
+                <p className="text-lg text-white/70 italic">{expertiseData.residential.tagline}</p>
+              </div>
+
+              {/* Stats Row - Prominent Display */}
+              <div className="grid grid-cols-3 gap-4 md:gap-8 mb-12">
+                {Object.entries(expertiseData.residential.stats).map(([key, value]) => (
+                  <motion.div
+                    key={key}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ duration: 0.5, delay: 0.6 }}
+                    className="text-center p-4 md:p-6 rounded-2xl bg-white/10 backdrop-blur-sm"
+                  >
+                    <div className="text-3xl md:text-5xl font-bold text-white mb-1">{value}</div>
+                    <div className="text-xs md:text-sm text-white/60 uppercase tracking-wider">
+                      {key === "transactions"
+                        ? "Transactions"
+                        : key === "avis"
+                          ? "Avis 5 étoiles"
+                          : key === "experience"
+                            ? "Expérience"
+                            : key}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Description */}
+              <p className="text-center text-white/80 text-lg max-w-2xl mx-auto mb-12 leading-relaxed">
+                {expertiseData.residential.description}
+              </p>
+
+              {/* Services Grid */}
+              <div className="grid md:grid-cols-3 gap-4 md:gap-6 mb-10">
+                {expertiseData.residential.services.map((service, index) => (
+                  <motion.div
+                    key={service.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
+                    className="p-5 md:p-6 rounded-xl bg-white/10 backdrop-blur-sm hover:bg-white/15 transition-colors group"
+                  >
+                    <h5 className="font-bold text-white mb-2 group-hover:text-white/90 transition-colors">
+                      {service.label}
+                    </h5>
+                    <p className="text-sm text-white/60 leading-relaxed">{service.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* CTA Button */}
+              <div className="text-center">
+                <Button
+                  size="lg"
+                  className="bg-white text-[#182542] hover:bg-white/90 font-semibold px-8"
+                  onClick={() => {
+                    const contactSection = document.getElementById("contact")
+                    if (contactSection) {
+                      contactSection.scrollIntoView({ behavior: "smooth" })
+                    }
+                  }}
                 >
-                  <div className="h-1.5 bg-[#182542]" />
-
-                  {/* Header */}
-                  <div className="p-6 md:p-8 flex flex-col flex-1">
-                    <div className="mb-4">
-                      <h4 className="text-2xl font-bold text-[#182542]">{data.title}</h4>
-                      <p className="text-sm font-medium text-[#182542]/70">{data.tagline}</p>
-                    </div>
-
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-6">{data.description}</p>
-
-                    {/* Stats Row */}
-                    <div className="flex gap-4 mb-6 pb-6 border-b border-border">
-                      {Object.entries(data.stats).map(([key, value]) => (
-                        <div key={key} className="flex-1 text-center">
-                          <div className="text-xl md:text-2xl font-bold text-[#182542]">{value}</div>
-                          <div className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wider">
-                            {key === "transactions"
-                              ? "Transactions"
-                              : key === "satisfaction"
-                                ? "Satisfaction"
-                                : key === "experience"
-                                  ? "Expérience"
-                                  : key === "portfolio"
-                                    ? "Portfolio"
-                                    : key === "roi"
-                                      ? "ROI moyen"
-                                      : key}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Services List */}
-                    <div className="space-y-3 mb-6">
-                      {data.services.map((service, index) => (
-                        <div
-                          key={service.label}
-                          className="p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
-                        >
-                          <h5 className="font-semibold text-sm text-[#182542]">{service.label}</h5>
-                          <p className="text-xs text-muted-foreground leading-relaxed">{service.desc}</p>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="mt-auto">
-                      <Button className="w-full bg-[#182542] hover:bg-[#182542]/90 text-white">
-                        Discuter de mon projet {type === "residential" ? "résidentiel" : "commercial"}
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                      </Button>
-                    </div>
-                  </div>
-                </motion.div>
-              )
-            })}
+                  Discuter de mon projet
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>

@@ -15,9 +15,9 @@ export default function Home() {
       <Hero />
       <Services />
       <Properties />
+      <MortgageCalculator />
       <Partners />
       <Testimonials />
-      <MortgageCalculator />
       <Contact />
       <Footer />
     </main>

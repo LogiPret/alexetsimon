@@ -21,9 +21,9 @@ const partnerCategories = [
         image: "/rbc-logo-shield.svg",
       },
       {
-        name: "Marie-Ève Hamelin",
+        name: "Véronique Bibeau",
         company: "Desjardins",
-        phone: "514-606-6696",
+        phone: "514-686-5275",
         image: "/desjardins-logo.png",
       },
       {
